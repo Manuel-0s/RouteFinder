@@ -146,8 +146,6 @@ export class GridRenderer {
                 } else if (type === 'path') {
                     node.sprite.tint = COLORS.PATH;
                     node.sprite.scale.set(1.25); 
-                    node.glowSprite.visible = true;
-                    node.glowSprite.tint = COLORS.GLOW;
                 }
             }
         }
