@@ -1,6 +1,6 @@
 # RouteFinder
 
-Visualizador interactivo de algoritmos de búsqueda de rutas sobre una cuadrícula. El proyecto está construido con TypeScript, Vite, PixiJS y Tweakpane, y forma parte del trabajo de graficación.
+Visualizador interactivo de algoritmos de búsqueda de rutas sobre una cuadrícula. El proyecto está construido con TypeScript, Vite, PixiJS y Tweakpane.
 
 ## Requisitos
 
