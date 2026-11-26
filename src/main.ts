@@ -13,11 +13,13 @@ async function bootstrap() {
     new ControlPanel({
         onStart: (algorithm) => {
             if (!gridManager.startNode || !gridManager.endNode) {
-                alert('Por favor selecciona primero un Punto de Inicio (1er clic) y un Destino (2do clic).');
+                alert('Selecciona primero un Punto de Inicio (1er clic) y un Destino (2do clic).');
                 return;
             }
 
+            renderer.stopAnimation();
             gridManager.resetAlgorithmData();
+
             const result = solvePathfinding(
                 gridManager.grid,
                 gridManager.startNode,
@@ -25,14 +27,25 @@ async function bootstrap() {
                 algorithm
             );
 
-            if (result) {
-                renderer.drawPath(result, gridManager.startNode);
+            if (result.path.length > 0) {
+                renderer.animateSearch(result);
             } else {
+                renderer.animateSearch(result);
                 alert('No existe un camino posible hasta el destino.');
             }
         },
         onClear: () => {
+            renderer.stopAnimation();
             gridManager.clearAll();
+        },
+        onProjectionChange: (mode) => {
+            renderer.camera.setProjection(mode);
+        },
+        onSpeedChange: (speed) => {
+            renderer.setAnimationSpeed(speed);
+        },
+        onResetCamera: () => {
+            renderer.camera.centerCamera();
         },
     });
 }

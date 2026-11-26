@@ -1,5 +1,5 @@
 import { GRID_CONFIG } from '../config/constants';
-import type { AlgorithmType, Node } from '../types/grid.types';
+import type { AlgorithmType, Node, PathfindingResult } from '../types/grid.types';
 
 export function getNeighbors(grid: Node[][], node: Node): Node[] {
     const neighbors: Node[] = [];
@@ -17,13 +17,25 @@ export function heuristic(a: Node, b: Node): number {
     return Math.abs(a.row - b.row) + Math.abs(a.col - b.col);
 }
 
+function reconstructPath(endNode: Node): Node[] {
+    const path: Node[] = [];
+    let curr: Node | null = endNode;
+    while (curr) {
+        path.unshift(curr);
+        curr = curr.previous;
+    }
+    return path;
+}
+
 export function solvePathfinding(
     grid: Node[][],
     startNode: Node,
     endNode: Node,
     type: AlgorithmType
-): Node | null {
+): PathfindingResult {
     const openSet: Node[] = [];
+    const visitedOrder: Node[] = [];
+
     startNode.gDistance = 0;
     startNode.hDistance = heuristic(startNode, endNode);
     startNode.fDistance = type === 'astar' ? startNode.hDistance : 0;
@@ -38,11 +50,16 @@ export function solvePathfinding(
 
         const current = openSet.shift()!;
 
-        if (current === endNode) {
-            return endNode;
-        }
-
+        if (visitedSet.has(current)) continue;
         visitedSet.add(current);
+        visitedOrder.push(current);
+
+        if (current === endNode) {
+            return {
+                visitedOrder,
+                path: reconstructPath(endNode),
+            };
+        }
 
         const neighbors = getNeighbors(grid, current);
         for (const neighbor of neighbors) {
@@ -65,5 +82,5 @@ export function solvePathfinding(
         }
     }
 
-    return null;
+    return { visitedOrder, path: [] };
 }
