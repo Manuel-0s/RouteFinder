@@ -38,9 +38,6 @@ async function bootstrap() {
             renderer.stopAnimation();
             gridManager.clearAll();
         },
-        onProjectionChange: (mode) => {
-            renderer.camera.setProjection(mode);
-        },
         onSpeedChange: (speed) => {
             renderer.setAnimationSpeed(speed);
         },

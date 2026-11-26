@@ -1,5 +1,4 @@
 import type { Container } from 'pixi.js';
-import type { ProjectionMode } from '../types/grid.types';
 
 export class CameraController {
     private worldContainer: Container;
@@ -18,28 +17,15 @@ export class CameraController {
         this.worldContainer.y = window.innerHeight / 2;
     }
 
-    public setProjection(mode: ProjectionMode): void {
-        if (mode === 'isometric') {
-            this.worldContainer.scale.set(this.zoomLevel, this.zoomLevel * 0.55);
-            this.worldContainer.rotation = Math.PI / 4;
-        } else {
-            this.worldContainer.scale.set(this.zoomLevel, this.zoomLevel);
-            this.worldContainer.rotation = 0;
-        }
-    }
-
     private setupEvents(): void {
+        // Zoom con rueda del ratón
         window.addEventListener('wheel', (e) => {
             const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
             this.zoomLevel = Math.min(Math.max(this.zoomLevel * zoomFactor, 0.4), 2.5);
-
-            const isIso = this.worldContainer.rotation !== 0;
-            this.worldContainer.scale.set(
-                this.zoomLevel,
-                isIso ? this.zoomLevel * 0.55 : this.zoomLevel
-            );
+            this.worldContainer.scale.set(this.zoomLevel);
         });
 
+        // Paneo con clic derecho o clic central
         window.addEventListener('contextmenu', (e) => e.preventDefault());
 
         window.addEventListener('pointerdown', (e) => {

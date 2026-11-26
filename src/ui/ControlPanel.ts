@@ -1,10 +1,9 @@
 import { Pane } from 'tweakpane';
-import type { AlgorithmType, ProjectionMode } from '../types/grid.types';
+import type { AlgorithmType } from '../types/grid.types';
 
 interface ControlCallbacks {
     onStart: (algorithm: AlgorithmType) => void;
     onClear: () => void;
-    onProjectionChange: (mode: ProjectionMode) => void;
     onSpeedChange: (speed: number) => void;
     onResetCamera: () => void;
 }
@@ -13,7 +12,6 @@ export class ControlPanel {
     private pane: Pane;
     private params: {
         algoritmo: AlgorithmType;
-        proyeccion: ProjectionMode;
         velocidad: number;
     };
 
@@ -21,7 +19,6 @@ export class ControlPanel {
         this.pane = new Pane({ title: 'Controles RouteFinder' });
         this.params = {
             algoritmo: 'astar',
-            proyeccion: 'orthographic',
             velocidad: 2,
         };
 
@@ -42,14 +39,7 @@ export class ControlPanel {
             callbacks.onClear();
         });
 
-        const camFolder = this.pane.addFolder({ title: 'Cámara y Proyección' });
-        camFolder.addBinding(this.params, 'proyeccion', {
-            options: {
-                '2D Ortográfica': 'orthographic',
-                'Isométrica': 'isometric',
-            },
-        }).on('change', (ev) => callbacks.onProjectionChange(ev.value));
-
+        const camFolder = this.pane.addFolder({ title: 'Cámara' });
         camFolder.addButton({ title: 'Centrar Cámara' }).on('click', () => {
             callbacks.onResetCamera();
         });
