@@ -1,13 +1,13 @@
-﻿# RouteFinder
+# RouteFinder
 
-Visualizador interactivo de algoritmos de bÃºsqueda de rutas sobre una cuadrÃ­cula. El proyecto estÃ¡ construido con TypeScript, Vite, PixiJS y Tweakpane, y forma parte del trabajo de graficaciÃ³n.
+Visualizador interactivo de algoritmos de búsqueda de rutas sobre una cuadrícula. El proyecto está construido con TypeScript, Vite, PixiJS y Tweakpane.
 
 ## Requisitos
 
-- Node.js 18 o una versiÃ³n posterior.
+- Node.js 18 o una versión posterior.
 - npm, incluido con Node.js.
 
-## InstalaciÃ³n
+## Instalación
 
 1. Clona el repositorio y entra en su directorio:
 
@@ -30,32 +30,14 @@ Inicia el servidor de Vite:
 npm run dev
 ```
 
-Abre la direcciÃ³n que muestre Vite en la terminal, normalmente `http://localhost:5173`.
+Abre la dirección que muestre Vite en la terminal, normalmente `http://localhost:5173`.
 
 ## Scripts disponibles
 
-| Comando | DescripciÃ³n |
+| Comando | Descripción |
 | --- | --- |
 | `npm run dev` | Inicia el servidor de desarrollo con Vite. |
-| `npm run build` | Comprueba los tipos de TypeScript y genera la compilaciÃ³n de producciÃ³n en `dist/`. |
-| `npm run preview` | Sirve localmente la compilaciÃ³n existente de `dist/`. |
+| `npm run build` | Comprueba los tipos de TypeScript y genera la compilación de producción en `dist/`. |
+| `npm run preview` | Sirve localmente la compilación existente de `dist/`. |
 
-Antes de ejecutar `npm run preview`, genera primero una compilaciÃ³n con `npm run build`.
-
-## Flujo para contribuir
-
-1. Crea una rama descriptiva desde `main`:
-
-   ```bash
-   git checkout -b feature/nombre-del-cambio
-   ```
-
-2. Instala dependencias y ejecuta el servidor de desarrollo.
-3. Realiza cambios y mantÃ©n la lÃ³gica de renderizado separada de la lÃ³gica de los algoritmos.
-4. Comprueba el proyecto antes de abrir un pull request:
-
-   ```bash
-   npm run build
-   ```
-
-5. Describe en el pull request quÃ© cambiÃ³, cÃ³mo probarlo y cualquier limitaciÃ³n conocida.
+Antes de ejecutar `npm run preview`, genera primero una compilación con `npm run build`.
